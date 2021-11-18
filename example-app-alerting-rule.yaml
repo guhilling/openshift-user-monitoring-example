@@ -9,7 +9,7 @@ spec:
     rules:
     - alert: VersionAlert
       for: 1m
-      expr: version{job="prometheus-example-app"} == 0
+      expr: version{job="prometheus-example-app"} == 1
       labels:
         severity: critical
       annotations:
