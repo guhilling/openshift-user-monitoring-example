@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: example-alert
+  namespace: user-monitoring-sample
+spec:
+  groups:
+  - name: example
+    rules:
+    - alert: VersionAlert
+      for: 1m
+      expr: version{job="prometheus-example-app"} == 0
+      labels:
+        severity: critical
+      annotations:
+        message: Test Alert to trigger alerting for user monitoring.
