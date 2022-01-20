@@ -1,0 +1,6 @@
+resources:
+- service.yaml
+- deployment.yaml
+- service-monitor.yaml
+- alerting-rule.yaml
+namespace: user-alert-example

@@ -7,23 +7,19 @@ Before adding the resources enable user workload monitoring by configuring clust
 
 ## Create the demo project
 
-```oc apply -f example-app-all.yaml```
+```oc apply -k .```
 
-This will create a namespace, deployment and service. The deployment will create 2 pods to be monitored.
+This will create a deployment, service, servicemonitor and prometheusrule. The deployment will create 2 pods to be monitored.
 If you want to access the metrics manually you need to expose the service as a route or ingress. 
 
 Metrics are available at the ```metrics``` context.
 
-## Create the service monitor
+## Use the service monitor
 
-```oc apply -f example-app-service-monitor.yaml```
+You should be able to see the values in the _openshift_ prometheus view. It is actually _collected_ by the user-monitoring prometheus.
 
-You should be able to see the values in the _openshift_ prometheus view.
+## Test the alerting rule
 
-## Create the alerting rule
+The alert will start to fire right away. It will be visible in the default alertmanager-ui as well as the alert overview _but_ you need to manually remove the default filter on the alerts to ```Source==Platform```.
 
-```oc apply -f example-app-alerting-rule.yaml```
-
-The alert will start to fire right away. It will be visible in the default alertmanager-ui but _not_ in the alert overview.
-
-You can also see it in the Thanos-Ruler UI. The corresponding route is available in the ```user-workload-monitoring``` namespace.
+You can also see it in the Thanos-Ruler UI.
